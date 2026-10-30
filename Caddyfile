@@ -1,0 +1,5 @@
+# DOMAIN — .env faylida (masalan cargo.sizningdomen.uz). HTTPS sertifikatni Caddy o'zi oladi va yangilaydi.
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy web:3100
+}

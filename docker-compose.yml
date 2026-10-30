@@ -1,5 +1,5 @@
-# Ikkala qismni birga ishga tushirish:  docker compose up -d --build
-# Keyin brauzerda:  http://SERVER_IP:3100
+# Serverda:  docker compose up -d --build
+# Kerak: ./.env (DOMAIN) va ./server/.env (ADMIN_PASSWORD, BOT_TOKEN). Batafsil: DEPLOY.md
 services:
   server:
     build: ./server
@@ -10,6 +10,7 @@ services:
       PORT: "4000"
     volumes:
       - cargo-data:/data
+    # tashqariga ochilmaydi: faqat web orqali
 
   web:
     build:
@@ -18,8 +19,22 @@ services:
         BACKEND_URL: http://server:4000
     restart: unless-stopped
     depends_on: [server]
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on: [web]
     ports:
-      - "3100:3100"
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?.env faylida DOMAIN ni yozing}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
 
 volumes:
   cargo-data:
+  caddy-data:
+  caddy-config:

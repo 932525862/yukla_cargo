@@ -14,7 +14,7 @@ Xitoydan O'zbekistonga yuk tashish nazorati. **Faqat web**: brauzerda (telefon v
 - **Skaner**: kamera bilan shtrix kod o'qish yoki qo'lda kiritish, mijoz ID, 4 tagacha rasm.
 - **Ombor → Yo'lda → UZB ombor → Topshirish** jarayoni, partiyalar, qidiruv, ko'plab tanlab o'tkazish.
 - Har yuk kartasida mijoz ismi, telefoni, telegrami va **amalni bajargan hodim ismi** ko'rinadi.
-- **Telegram bot** (serverda ishlaydi): mijoz ID sini yozsa, yuk holati va rasmi chiqadi; holat o'zgarganda avtomatik xabar boradi. Bot tokeni Admin paneldan kiritiladi.
+- **Telegram bot** (serverda ishlaydi): mijoz ID sini yozsa, yuk holati va rasmi chiqadi; holat o'zgarganda avtomatik xabar boradi. Bot tokeni `server/.env` dagi `BOT_TOKEN` dan olinadi.
 
 ## Ishga tushirish (VS Code terminalida)
 Node.js 20+ kerak.
@@ -29,15 +29,7 @@ Parol bo'sh qoldirilsa, tasodifiy parol yaratilib server terminalida chiqadi (fa
 Ishlab chiqarish uchun: `npm run build && npm start`.
 
 ## Serverga joylash
-```bash
-cp server/.env.example server/.env && nano server/.env    # ADMIN_PASSWORD, ixtiyoriy BOT_TOKEN
-docker compose up -d --build                               # http://SERVER_IP:3100
-```
-Baza va rasmlar `cargo-data` volume ida saqlanadi.
-
-**HTTPS shart (kamera uchun).** Telefon brauzeri kameraga faqat HTTPS (yoki localhost) da ruxsat beradi.
-Domen oling va Caddy qo'ying (`Caddyfile`): `cargo.sizningdomen.uz { reverse_proxy localhost:3100 }`.
-HTTPS'siz ham ishlaydi, faqat shtrix kodni qo'lda kiritish kerak bo'ladi.
+DigitalOcean (Docker + HTTPS) bo'yicha to'liq yo'riqnoma: **[DEPLOY.md](DEPLOY.md)**.
 
 ## Telefonga o'rnatish
 Brauzer menyusi → **"Bosh ekranga qo'shish"** — ilova kabi alohida oynada ochiladi.
