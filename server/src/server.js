@@ -27,6 +27,8 @@ function createApp({ repo, tg, bot, uploadsDir, publicDir, log = console }) {
   });
 
   const app = express();
+  // Caddy va Next proxy orqasida haqiqiy mijoz IP sini olish (login urinishlari cheklovi uchun)
+  app.set('trust proxy', Number(process.env.TRUST_PROXY || 0));
   app.disable('x-powered-by');
   app.use(compression());
   // Brauzerdan (web versiya) murojaat qilish uchun CORS
