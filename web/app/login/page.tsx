@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Button, PasswordInput, TextInput } from "@/components/ui";
-import { Icon } from "@/components/icons";
 
 export default function LoginPage() {
   const { user, loading, login } = useAuth();
@@ -35,10 +34,9 @@ export default function LoginPage() {
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-sm flex-col justify-center px-6 py-10">
       <div className="mb-8 text-center">
-        <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-2xl bg-brand text-white shadow-lg">
-          <Icon name="truck" size={32} />
-        </div>
-        <h1 className="text-2xl font-extrabold">Cargo Tracker</h1>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.png" alt="Yukla Cargo" className="mx-auto mb-3 h-24 w-auto object-contain" />
+        <h1 className="text-2xl font-extrabold">Yukla Cargo</h1>
         <p className="mt-1 text-sm text-ink-soft">Tizimga kirish</p>
       </div>
 
