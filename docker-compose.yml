@@ -1,0 +1,25 @@
+# Ikkala qismni birga ishga tushirish:  docker compose up -d --build
+# Keyin brauzerda:  http://SERVER_IP:3100
+services:
+  server:
+    build: ./server
+    restart: unless-stopped
+    env_file: ./server/.env
+    environment:
+      DATA_DIR: /data
+      PORT: "4000"
+    volumes:
+      - cargo-data:/data
+
+  web:
+    build:
+      context: ./web
+      args:
+        BACKEND_URL: http://server:4000
+    restart: unless-stopped
+    depends_on: [server]
+    ports:
+      - "3100:3100"
+
+volumes:
+  cargo-data:
